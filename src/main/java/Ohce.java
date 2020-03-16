@@ -4,7 +4,7 @@ public class Ohce {
 
     public Ohce(CurrentHour currentHour) {
         this.currentHour = currentHour;
-        name = "";
+        name = "Pedro";
     }
 
     public String respond(String input) {
@@ -14,7 +14,7 @@ public class Ohce {
         }
 
         if (input.equals("Stop!")) {
-            return "Adios Pedro";
+            return String.format("Adios %s",name);
         }
 
         String reverse = getReverse(input);

@@ -45,6 +45,7 @@ public class OhceShould {
         when(currentHour.get()).thenReturn(14);
         assertEquals("¡Buenas tardes Pedro!", ohce.respond("ohce Pedro"));
     }
+
     @Test
     void say_buenas_noches_when_started_between_20_and_6() {
         when(currentHour.get()).thenReturn(21);
@@ -55,5 +56,13 @@ public class OhceShould {
     void print_out_name_provided_at_start() {
         when(currentHour.get()).thenReturn(10);
         assertEquals("¡Buenos días Ewan!", ohce.respond("ohce Ewan"));
+    }
+
+    @Test
+    void print_out_stop_with_provided_name() {
+        when(currentHour.get()).thenReturn(10);
+        ohce.respond("ohce Ewan");
+        assertEquals("Adios Ewan", ohce.respond("Stop!"));
+
     }
 }
