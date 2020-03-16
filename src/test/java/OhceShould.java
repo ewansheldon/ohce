@@ -3,22 +3,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class OhceShould {
 
-    @Mock
-    CurrentHour currentHour;
+    TestableClock clock;
     private Ohce ohce;
 
     @BeforeEach
     void setUp() {
-        ohce = new Ohce(currentHour);
+        clock = new TestableClock();
+        ohce = new Ohce(clock);
     }
 
     @Test
@@ -40,24 +38,37 @@ public class OhceShould {
     @CsvSource({
             "10,¡Buenos días Pedro!",
             "14,¡Buenas tardes Pedro!",
-            "21,¡Buenas noches Pedro!",
+            "22,¡Buenas noches Pedro!"
     })
     void return_proper_greeting_depending_on_time(int hour, String response) {
-        when(currentHour.get()).thenReturn(hour);
+        clock.setHour(hour);
         assertEquals(response, ohce.respond("ohce Pedro"));
     }
 
     @Test
     void print_out_name_provided_at_start() {
-        when(currentHour.get()).thenReturn(10);
+        clock.setHour(8);
         assertEquals("¡Buenos días Ewan!", ohce.respond("ohce Ewan"));
     }
 
     @Test
     void print_out_stop_with_provided_name() {
-        when(currentHour.get()).thenReturn(10);
+        clock.setHour(8);
         ohce.respond("ohce Ewan");
         assertEquals("Adios Ewan", ohce.respond("Stop!"));
 
+    }
+
+    class TestableClock extends Clock {
+        private int hour;
+
+        public void setHour(int hour) {
+            this.hour = hour;
+        }
+
+        @Override
+        protected int getHour() {
+            return hour;
+        }
     }
 }
