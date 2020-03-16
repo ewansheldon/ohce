@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.util.Calendar;
 
 public class Clock {
     public Clock() {
@@ -21,6 +21,7 @@ public class Clock {
     }
 
     protected int getHour() {
-        return new Date().getHours();
+        Calendar now = Calendar.getInstance();
+        return now.get(Calendar.HOUR_OF_DAY);
     }
 }
