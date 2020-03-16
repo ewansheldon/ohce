@@ -14,7 +14,7 @@ public class Ohce {
         }
 
         if (input.equals("Stop!")) {
-            return String.format("Adios %s",name);
+            return String.format("Adios %s", name);
         }
 
         String reverse = getReverse(input);

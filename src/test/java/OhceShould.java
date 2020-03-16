@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -34,22 +36,15 @@ public class OhceShould {
         assertEquals("Adios Pedro", ohce.respond("Stop!"));
     }
 
-    @Test
-    void say_buenos_dias_when_started_between_6_and_12() {
-        when(currentHour.get()).thenReturn(10);
-        assertEquals("¡Buenos días Pedro!", ohce.respond("ohce Pedro"));
-    }
-
-    @Test
-    void say_buenas_tardes_when_started_between_12_and_20() {
-        when(currentHour.get()).thenReturn(14);
-        assertEquals("¡Buenas tardes Pedro!", ohce.respond("ohce Pedro"));
-    }
-
-    @Test
-    void say_buenas_noches_when_started_between_20_and_6() {
-        when(currentHour.get()).thenReturn(21);
-        assertEquals("¡Buenas noches Pedro!", ohce.respond("ohce Pedro"));
+    @ParameterizedTest
+    @CsvSource({
+            "10,¡Buenos días Pedro!",
+            "14,¡Buenas tardes Pedro!",
+            "21,¡Buenas noches Pedro!",
+    })
+    void return_proper_greeting_depending_on_time(int hour, String response) {
+        when(currentHour.get()).thenReturn(hour);
+        assertEquals(response, ohce.respond("ohce Pedro"));
     }
 
     @Test
