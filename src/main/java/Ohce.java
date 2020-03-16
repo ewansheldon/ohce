@@ -10,11 +10,8 @@ public class Ohce {
     public String respond(String input) {
         if (input.contains("ohce")) {
             name = input.split(" ")[1];
-            return greeting(currentHour.get());
+            return String.format(greeting(currentHour.get()), name);
         }
-//        if (input.equals("ohce Pedro")) {
-//            return greeting(currentHour.get());
-//        }
 
         if (input.equals("Stop!")) {
             return "Adios Pedro";
@@ -29,12 +26,12 @@ public class Ohce {
 
     private String greeting(int hour) {
         if (isBetween(hour, 6, 12)) {
-            return "¡Buenos días " + name + "!";
+            return "¡Buenos días %s!";
         }
         if (isBetween(hour, 12, 20)) {
-            return "¡Buenas tardes " + name + "!";
+            return "¡Buenas tardes %s!";
         }
-        return "¡Buenas noches " + name + "!";
+        return "¡Buenas noches %s!";
 
     }
 
