@@ -22,14 +22,18 @@ public class Ohce {
     }
 
     private String greeting(int hour) {
-        if (hour >= 6 && hour < 12) {
+        if (isBetween(hour, 6, 12)) {
             return "¡Buenos días Pedro!";
         }
-        if (hour >= 12 && hour < 20) {
+        if (isBetween(hour,12,20)) {
             return "¡Buenas tardes Pedro!";
         }
         return "¡Buenas noches Pedro!";
 
+    }
+
+    private boolean isBetween(int hour, int start, int end) {
+        return hour >= start && hour < end;
     }
 
     private String getReverse(String input) {
