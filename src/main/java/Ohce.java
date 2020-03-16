@@ -7,7 +7,7 @@ public class Ohce {
 
     public String respond(String input) {
         if (input.equals("ohce Pedro")) {
-            return greeting();
+            return greeting(currentHour.get());
         }
 
         if (input.equals("Stop!")) {
@@ -21,15 +21,15 @@ public class Ohce {
         return reverse;
     }
 
-    private String greeting() {
-        int hour = currentHour.get();
+    private String greeting(int hour) {
         if (hour >= 6 && hour < 12) {
             return "¡Buenos días Pedro!";
-        } else if (hour >=12 && hour < 20){
-            return "¡Buenas tardes Pedro!";
-        } else {
-            return "¡Buenas noches Pedro!";
         }
+        if (hour >= 12 && hour < 20) {
+            return "¡Buenas tardes Pedro!";
+        }
+        return "¡Buenas noches Pedro!";
+
     }
 
     private String getReverse(String input) {
