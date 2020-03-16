@@ -51,5 +51,9 @@ public class OhceShould {
         assertEquals("¡Buenas noches Pedro!", ohce.respond("ohce Pedro"));
     }
 
-
+    @Test
+    void print_out_name_provided_at_start() {
+        when(currentHour.get()).thenReturn(10);
+        assertEquals("¡Buenos días Ewan!", ohce.respond("ohce Ewan"));
+    }
 }
