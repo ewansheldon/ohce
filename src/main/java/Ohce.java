@@ -23,10 +23,12 @@ public class Ohce {
 
     private String greeting() {
         int hour = currentHour.get();
-        if (hour < 12) {
+        if (hour >= 6 && hour < 12) {
             return "¡Buenos días Pedro!";
-        } else {
+        } else if (hour >=12 && hour < 20){
             return "¡Buenas tardes Pedro!";
+        } else {
+            return "¡Buenas noches Pedro!";
         }
     }
 

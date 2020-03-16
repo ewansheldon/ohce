@@ -41,8 +41,15 @@ public class OhceShould {
     }
 
     @Test
-    void say_buenos_tardes_when_started_between_12_and_8() {
+    void say_buenas_tardes_when_started_between_12_and_20() {
         when(currentHour.get()).thenReturn(14);
         assertEquals("¡Buenas tardes Pedro!", ohce.respond("ohce Pedro"));
     }
+    @Test
+    void say_buenas_noches_when_started_between_20_and_6() {
+        when(currentHour.get()).thenReturn(21);
+        assertEquals("¡Buenas noches Pedro!", ohce.respond("ohce Pedro"));
+    }
+
+
 }
